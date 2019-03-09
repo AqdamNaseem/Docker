@@ -133,6 +133,21 @@ A container is defined by its image as well as any configuration options you pro
 </p>
 
 ## How Docker works in Windows or Mac OS based System
+
+The original Linux container technology, LXC is a Linux operating system level virtualization method for running multiple isolated Linux systems on a single host. Namespaces and cgroups make LXC possible.
+
+Containers decouple applications from operating systems, which means that users can have a clean and minimal Linux operating system and run everything else in one or more isolated container.
+
+Also, because the operating system is abstracted away from containers, you can move a container across any Linux server that supports the container runtime environment.
+
+Docker introduced several significant changes to LXC that make containers more portable and flexible to use.
+
+By taking the LXC concept and building an API and ecosystem around it, the developers of Docker have made working with containers far more accessible to developers and far more useful to enterprises.
+
+Finally, although Docker was originally built atop LXC, eventually the Docker team created its own runtime, called libcontainer. Libcontainer not only provides a richer layer of services for containers, but also makes it easier for the Docker team to develop Docker container technology separately from Linux.
+
+Today, Docker is a Linux or Windows utility that can efficiently create, ship, and run containers.
+
 In their current forms, Docker-on-Windows and Docker-on-Mac are somewhat less clunky than the earlier iteration. Previously, using Docker on these systems required users to run VirtualBox virtual machines(Docker Toolbox). Now Docker uses hypervisors native to the respective operating systems. Those hypervisors are xhyve on OS X and Microsoft Hyper-V on Windows. They take the place of VirtualBox.
 
 Docker is making much of the fact that its containers now can run on Windows and OS X using native hypervisors. The change does streamline things a little bit, since it makes it easier to integrate Docker environments on these platforms more tightly into the host operating system. Combined with the bundling of Docker development tools into the Windows and OS X Docker packages, developers now have a one-stop shop for running Docker containers on these systems.
