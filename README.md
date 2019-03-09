@@ -1,6 +1,6 @@
 # Docker
 
-Docker uses the concept of Containerization.Containerization is often confused with Virtualization(with Hypervisors).Let us first understand what is virtualization and how containerization if different from Virtualization
+Docker uses the concept of Containerization.Containerization is often confused with Virtualization(with Hypervisors).Let us first understand what is virtualization and how containerization differs from Virtualization
 
 ## Virtualization
 Virtualization is a collection of software technologies that enable software applications to run on virtual hardware (virtualization via virtual machines and hypervisor) or virtual operating systems (virtualization via containers). 
