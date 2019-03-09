@@ -51,7 +51,7 @@ The traditional hypervisors like VMware, Virtual Box, etc can run on Windows, Li
 Another difference is that containers share the same kernel as the host machine which is not in the case of hypervisors.
 
 | __Virtual Machines (VMs)__ | __Containers__ |
-|----------------------------||----------------------------|
+|----------------------------|----------------------------|
 | Hardware Level Virtualization	| Operating System Virtualization |
 | Heavyweight |	Lightweight |
 | Slow Provisioning |	Real-time and fast provisioning|
