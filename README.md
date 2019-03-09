@@ -27,4 +27,96 @@ Containerization has recently gained hypes with an open source tool Docker. Dock
 
 We can even have a hybrid architecture by combining virtualization by both virtual machines and containers, i.e., the container engine and associated containers execute on top of a virtual machine. Use of a hybrid container architecture is also known as hybrid containerization.
 
+The following figure provides a detailed illustration of virtualization via containers. Note that the virtualization layer (containers and container engine) sits on top of the infrastructure layer and depends on certain parts of the operating system/kernel.
+
+<p align="center">
+<img src="https://github.com/AqdamNaseem/Docker/blob/master/images/Containerization.png">
+</p>
+
+The following figure shows a hybrid container architecture that uses virtualization by both virtual machines and containers.
+
+<p align="center">
+<img src="https://github.com/AqdamNaseem/Docker/blob/master/images/Hybrid.png">
+</p>
+
 ## Containerization vs Virtualization (via traditional hypervisors)
+
+<p align="center">
+<img src="https://github.com/AqdamNaseem/Docker/blob/master/images/Difference.png">
+</p>
+
+<p align="center">
+<img src="https://github.com/AqdamNaseem/Docker/blob/master/images/Description.png">
+</p>
+
+Containers are becoming more widely used because they provide many of the isolation benefits of VMs without as much time and space overhead.
+
+Although containers are typically hosted on some version of Linux, they are also now hosted on other operating systems, such as Windows and Solaris.
+
+The traditional hypervisors like VMware, Virtual Box, etc can run on Windows, Linux as well as all those operating systems that support hypervisors.
+
+Another difference is that containers share the same kernel as the host machine which is not in the case of hypervisors.
+
+## Pros of Virtualization via Containers
+
+The following advantages have led to the widespread use of virtualization via containers:
+
+__Hardware costs__. Virtualization via containers decreases hardware costs by enabling consolidation (i.e., the allocation of multiple applications to the same hardware improves hardware utilization). It enables concurrent software to take advantage of the true concurrency provided by a multicore hardware architecture. In addition, it enables system architects to replace several lightly-loaded machines with fewer, more heavily-loaded machines to minimize SWAP-C (size, weight, power, and cooling), free up hardware for new functionality, support load balancing, and support cloud computing, server farms, and mobile computing.
+
+__Reliability and robustness__. The modularity and isolation provided by VMs improve reliability, robustness, and operational availability by localizing the impact of defects to a single VM and enabling software failover and recovery.
+Scalability. A single container engine can efficiently manage large numbers of containers, enabling additional containers to be created as needed.
+
+__Spatial isolation__. Containers support lightweight spatial isolation by providing each container with its own resources (e.g., core processing unit, memory, and network access) and container-specific namespaces.
+Storage. Compared with virtual machines, containers are lightweight with regard to storage size. The applications within containers share both binaries and libraries.
+
+__Performance__. Compared with virtual machines, containers increase performance (throughput) because they do not emulate the underlying hardware. Note that this advantage is lost if containers are hosted on virtual machines (i.e., when using a hybrid virtualization architecture).
+Real-time applications. Containers provide more consistent timing than virtual machines, although this advantage is lost when using hybrid virtualization.
+
+__Continuous integration__. Containers support Agile and continuous development processes by enabling the integration of increments of container-hosted functionality.
+Portability. Containers support portability from development to production environments, especially for cloud-based applications.
+
+__Safety__. Safety is improved by localizing the impact of faults and failures to individual containers.
+Security. The modular architecture provided by the containers increases the complexity and difficulty of attacks. Spatial isolation largely limits impact of malware to a single container. A container that is compromised can be terminated and replaced with a new container that is booted from a known clean image, which enables a rapid system restore or software reload following a cybersecurity compromise. Finally, security software and rules implemented at the container engine level can apply to all of its containers.
+
+## Cons of Virtualization via Containers
+
+Although there are many advantages to moving to virtualization via containers, architects must address challenges and associated risks in the following six areas:
+
+__Shared Resources__. Applications within containers share many resources including (1) container-specific resources including the container, container engine, and OS kernel, (2) virtualization by VM resources including the virtual machine, the hypervisor, and the host operating system if using a type-2 hypervisor, and (3) multicore processing resources including (a) processor-internal resources (L3 cache, system bus, memory controller, I/O controllers, and interconnects) and (b) processor-external resources (main memory, I/O devices, and networks). Such shared resources imply (1) single points of failure exist, (2) two applications running in the samecontainer can interfere with each other, and (3) software running in onecontainer can impact software running in anothercontainer (i.e., interference can violate spatial and temporal isolation).
+
+__Interference Analysis__. Shared resources imply interference. Virtualization via containers increases the difficulty of the analysis of temporal interference (e.g., meeting timing deadlines) and tends to make the resulting timing estimates overly conservative. Interference analysis becomes more complex as the number of containers increases and virtualization via containers is combined with virtualization via VMs and multicore processing. The number of interference paths increases rapidly as the number of containers increases. The resulting large number of interference paths typically make the exhaustive analysis of all such paths impossible. This, in turn, forces the architect to select only a relatively small representative selection of paths. 
+
+__Safety__. Although containers provide significant support for isolation, the use of containers does not guarantee isolation. Temporal interference may cause delays that cause hard, real-time deadlines to be missed. Spatial interference can cause memory clashes. Whether by VM or containers, traditional safety accreditation and certification processes and policies do not take virtualization into account, making safety (re)accreditation and (re)certification difficult.
+
+__Security__. Containers are not by default secure and require significant work to make them secure. One must to ensure that (1) no data is stored inside containers, (2) container processes are forced to write to container-specific file systems, (3) the container's network namespace is connected to a specific, private intranet, and (4) the privileges of container services are minimized (e.g., non-root if possible). As with safety, traditional security accreditation and certification processes and policies do not take virtualization into account, making security (re)accreditation and (re)certification difficult.
+
+__Container Sprawl__. Excessive containerization is relatively common and increases the amount of time and effort spent on container management.
+
+## Docker overview
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production
+
+Docker provides the ability to package and run an application in a loosely isolated environment called a container. The isolation and security allow you to run many containers simultaneously on a given host. Containers are lightweight because they don’t need the extra load of a hypervisor, but run directly within the host machine’s kernel. This means you can run more containers on a given hardware combination than if you were using virtual machines. You can even run Docker containers within host machines that are actually virtual machines!
+
+Docker provides tooling and a platform to manage the lifecycle of your containers:
+
+- Develop your application and its supporting components using containers.
+- The container becomes the unit for distributing and testing your application.
+- When you’re ready, deploy your application into your production environment, as a container or an orchestrated service. This works the same whether your production environment is a local data center, a cloud provider, or a hybrid of the two.
+
+## Docker Engine
+Docker Engine is a client-server application with these major components:
+
+- A server which is a type of long-running program called a daemon process (the dockerd command).
+- A REST API which specifies interfaces that programs can use to talk to the daemon and instruct it what to do.
+- A command line interface (CLI) client (the docker command).
+
+## How Docker works in Windows or Mac OS based System
+In their current forms, Docker-on-Windows and Docker-on-Mac are somewhat less clunky than the earlier iteration. Previously, using Docker on these systems required users to run VirtualBox virtual machines(Docker Toolbox). Now Docker uses hypervisors native to the respective operating systems. Those hypervisors are xhyve on OS X and Microsoft Hyper-V on Windows. They take the place of VirtualBox.
+
+Docker is making much of the fact that its containers now can run on Windows and OS X using native hypervisors. The change does streamline things a little bit, since it makes it easier to integrate Docker environments on these platforms more tightly into the host operating system. Combined with the bundling of Docker development tools into the Windows and OS X Docker packages, developers now have a one-stop shop for running Docker containers on these systems.
+
+But these updates do not really amount to much. At the end of the day, Docker on Windows and OS X still runs inside a Linux virtual machine. (Specifically, it uses the lightweight Alpine Linux distribution.)
+
+That means when Docker says you can run Docker containers on Windows or OS X, it’s not exactly true. You’re still running them on top of Linux, using a Linux virtual machine that runs on top of Windows or OS X.
+
+And when you throw a virtual machine into the mix, you lose efficiency. True, Alpine Linux is not exactly a resource hog. The overhead it adds to a Docker system is relatively negligible, especially on modern machines. But it’s overhead all the same.
